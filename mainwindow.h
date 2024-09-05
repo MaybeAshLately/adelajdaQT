@@ -26,6 +26,8 @@ public:
 private slots:
     void on_add_new_list_clicked();
 
+    void on_listWidget_itemClicked(QListWidgetItem *item);
+
 private:
     Ui::MainWindow *ui;
     std::vector<QString> listNames;

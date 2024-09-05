@@ -48,10 +48,6 @@ void MainWindow::setNamesOnWidgetList()
     {
         ui->listWidget->addItem(listNames.at(i));
     }
-    ui->listWidget->addItem("hiszpanski");
-    ui->listWidget->addItem("polski");
-    ui->listWidget->addItem("angielski");
-    ui->listWidget->addItem("jidysz");
 }
 
 void MainWindow::getListNamesFromFileNamesInDirectory()
@@ -80,6 +76,12 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::on_add_new_list_clicked()
+{
+
+}
+
+
+void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 {
 
 }
