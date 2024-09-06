@@ -17,7 +17,7 @@
    <widget class="QGraphicsView" name="image">
     <property name="geometry">
      <rect>
-      <x>245</x>
+      <x>240</x>
       <y>10</y>
       <width>251</width>
       <height>251</height>
@@ -43,11 +43,14 @@
    <widget class="QListWidget" name="listWidget">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>170</x>
       <y>310</y>
       <width>261</width>
-      <height>192</height>
+      <height>16</height>
      </rect>
+    </property>
+    <property name="cursor" stdset="0">
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
    </widget>
   </widget>

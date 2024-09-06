@@ -9,27 +9,22 @@
 #include <filesystem>
 #include <QString>
 #include <QDir>
+#include "addnewlist.h"
 
-/*
- * 1. pobieranie z pliku nazw list
- * 2. ustawianie ich na liście
- * 3. uruchamianie nowej aktywności dodawania nowej listy
- * 4. uruchamianie nowej aktywności widoku listy po kliknięciu w element listy
- * 5. Reładowanie nazw list jeśli lista została usunięta lub dodana
- *
- *
- *
- * */
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , dataTransfer(DataTransfer::getInstance())
 {
     ui->setupUi(this);
     setImage();
     getListNamesFromFileNamesInDirectory();
     setNamesOnWidgetList();
+    ui->add_new_list->setStyleSheet("background-color: #00BA0C;");
+    ui->listWidget->setStyleSheet("QListWidget::item { border-bottom: 1px solid gray; padding: 5px; }");
 }
+
 
 void MainWindow::setImage()
 {
@@ -42,17 +37,27 @@ void MainWindow::setImage()
    ui->image->setScene(scene);
 }
 
+
 void MainWindow::setNamesOnWidgetList()
 {
     for(size_t i=0;i<listNames.size();++i)
     {
         ui->listWidget->addItem(listNames.at(i));
     }
+    setListWidgetSize();
 }
+
+
+void MainWindow::setListWidgetSize()
+{
+    int width = ui->add_new_list->width();
+    int height = ui->listWidget->sizeHintForRow(0)*ui->listWidget->count()+ui->listWidget->count()*(1+5+5+1);
+    ui->listWidget->setFixedSize(width, height);
+}
+
 
 void MainWindow::getListNamesFromFileNamesInDirectory()
 {
-
     QString dataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/data";
 
     QDir dir(dataPath);
@@ -70,14 +75,32 @@ void MainWindow::getListNamesFromFileNamesInDirectory()
     }
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
 
 void MainWindow::on_add_new_list_clicked()
 {
+    AddNewList* w;
+    w= new AddNewList(this);
+    w->setStyleSheet("background-color: #FFFF86;");
+    w->setWindowTitle("Add list");
+    w->setFixedSize(800,600);
 
+    connect(w, &AddNewList::finished, this, &MainWindow::addNewListFinished);
+    this->hide();
+    w->show();
+}
+
+
+void MainWindow::addNewListFinished()
+{
+    this->show();
+    if(dataTransfer.newListAdded==true)
+    {
+        listNames.push_back(dataTransfer.newListName);
+        ui->listWidget->clear();
+        setNamesOnWidgetList();
+        dataTransfer.newListAdded=false;
+        dataTransfer.newListName="";
+    }
 }
 
 
@@ -86,3 +109,8 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 
 }
 
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}

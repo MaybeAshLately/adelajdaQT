@@ -7,6 +7,7 @@
 #include <vector>
 #include <string>
 #include <QListWidget>
+#include "DataTransfer.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -31,10 +32,15 @@ private slots:
 private:
     Ui::MainWindow *ui;
     std::vector<QString> listNames;
+    DataTransfer& dataTransfer;
 
 
     void setImage();
     void getListNamesFromFileNamesInDirectory();
     void setNamesOnWidgetList();
+    void setListWidgetSize();
+    void addNewListFinished();
+
+
 };
 #endif // MAINWINDOW_H
