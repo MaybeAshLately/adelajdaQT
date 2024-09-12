@@ -36,9 +36,9 @@ private:
     void setImage();
     void closeEvent(QCloseEvent *event);
 
-    bool checkIfNamesCorrect();
-    bool checkIfNameCorrect(QString string);
-    bool checkIfNameUnique();
+    bool checkIfNamesCorrect() const;
+    bool checkIfNameCorrect(const QString string) const;
+    bool checkIfNameUnique() const;
     void addList();
     void displayInfo();
 };

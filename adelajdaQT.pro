@@ -11,16 +11,19 @@ CONFIG += c++17
 SOURCES += \
     DataTransfer.cpp \
     addnewlist.cpp \
+    listoptions.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     DataTransfer.h \
     addnewlist.h \
+    listoptions.h \
     mainwindow.h
 
 FORMS += \
     addnewlist.ui \
+    listoptions.ui \
     mainwindow.ui
 
 # Default rules for deployment.

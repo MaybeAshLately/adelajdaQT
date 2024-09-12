@@ -9,7 +9,7 @@ class DataTransfer
     DataTransfer()
     {
         newListAdded=false;
-        newListName="";
+        listDeleted=false;
     }
 
     static std::unique_ptr<DataTransfer> instance;
@@ -30,7 +30,15 @@ public:
 
     //Data
     bool newListAdded;
-    QString newListName;
+
+    QString currentListName;
+    QString currentListLanguageOneName;
+    QString currentListLanguageTwoName;
+
+
+    bool listDeleted;
+
+
 };
 
 

@@ -10,6 +10,7 @@
 #include <QString>
 #include <QDir>
 #include "addnewlist.h"
+#include "listoptions.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -22,7 +23,6 @@ MainWindow::MainWindow(QWidget *parent)
     getListNamesFromFileNamesInDirectory();
     setNamesOnWidgetList();
     ui->add_new_list->setStyleSheet("background-color: #00BA0C;");
-    ui->listWidget->setStyleSheet("QListWidget::item { border-bottom: 1px solid gray; padding: 5px; }");
 }
 
 
@@ -40,11 +40,14 @@ void MainWindow::setImage()
 
 void MainWindow::setNamesOnWidgetList()
 {
+    ui->listWidget->clear();
+
     for(size_t i=0;i<listNames.size();++i)
     {
         ui->listWidget->addItem(listNames.at(i));
     }
     setListWidgetSize();
+    ui->listWidget->setStyleSheet("QListWidget::item { border-bottom: 1px solid gray; padding: 5px; }");
 }
 
 
@@ -58,6 +61,7 @@ void MainWindow::setListWidgetSize()
 
 void MainWindow::getListNamesFromFileNamesInDirectory()
 {
+    listNames.clear();
     QString dataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/data";
 
     QDir dir(dataPath);
@@ -95,18 +99,42 @@ void MainWindow::addNewListFinished()
     this->show();
     if(dataTransfer.newListAdded==true)
     {
-        listNames.push_back(dataTransfer.newListName);
-        ui->listWidget->clear();
+        getListNamesFromFileNamesInDirectory();
         setNamesOnWidgetList();
         dataTransfer.newListAdded=false;
-        dataTransfer.newListName="";
     }
 }
 
 
 void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 {
+    QString itemName= item->text();
+    dataTransfer.currentListName=itemName;
 
+    ListOptions* w;
+    w= new ListOptions(this);
+    w->setStyleSheet("background-color: #FFFF86;");
+    w->setWindowTitle(itemName);
+    w->setFixedSize(800,600);
+
+    connect(w, &ListOptions::finished, this, &MainWindow::listOptionsFinished);
+    this->hide();
+    w->show();
+}
+
+
+void MainWindow::listOptionsFinished()
+{
+    this->show();
+    if(dataTransfer.listDeleted==true)
+    {
+        getListNamesFromFileNamesInDirectory();
+        setNamesOnWidgetList();
+        dataTransfer.listDeleted=false;
+        dataTransfer.currentListName="";
+        dataTransfer.currentListLanguageOneName="";
+        dataTransfer.currentListLanguageTwoName="";
+    }
 }
 
 

@@ -24,6 +24,9 @@ AddNewList::AddNewList(QWidget *parent)
     setImage();
     goBackToMain=false;
 
+    ui->cancelButton->setStyleSheet("background-color: #FF0000;");
+    ui->addNewListButton->setStyleSheet("background-color: #00BA0C;");
+
 }
 
 
@@ -74,7 +77,7 @@ void AddNewList::on_addNewListButton_clicked()
 }
 
 
-bool AddNewList::checkIfNamesCorrect()
+bool AddNewList::checkIfNamesCorrect() const
 {
     if((listName=="")||(languageOneName=="")||(languageTwoName=="")) return false;
     if((checkIfNameCorrect(listName)==false)||(checkIfNameCorrect(languageOneName)==false)||(checkIfNameCorrect(languageTwoName)==false)) return false;
@@ -84,7 +87,7 @@ bool AddNewList::checkIfNamesCorrect()
 }
 
 
-bool AddNewList::checkIfNameCorrect(QString string)
+bool AddNewList::checkIfNameCorrect(const QString string) const
 {
     for(int i=0;i<string.size();++i)
     {
@@ -95,7 +98,7 @@ bool AddNewList::checkIfNameCorrect(QString string)
 }
 
 
-bool AddNewList::checkIfNameUnique()
+bool AddNewList::checkIfNameUnique() const
 {
     std::vector<QString> buffer;
     QString dataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/data";
@@ -129,8 +132,8 @@ void AddNewList::addList()
     file.close();
 
     dataTransfer.newListAdded=true;
-    dataTransfer.newListName=listName;
 
+    goBackToMain=true;
     this->close();
 }
 

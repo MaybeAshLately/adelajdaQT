@@ -40,6 +40,8 @@ private:
     void setNamesOnWidgetList();
     void setListWidgetSize();
     void addNewListFinished();
+    void listOptionsFinished();
+
 
 
 };
