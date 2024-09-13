@@ -51,12 +51,8 @@ void AddNewList::on_cancelButton_clicked()
 
 void AddNewList::closeEvent(QCloseEvent *event)
 {
-    QDialog::closeEvent(event);
-    emit finished(0);
-
     if(goBackToMain==true)
     {
-        QDialog::closeEvent(event);
         emit finished(0);
     }
     else
@@ -102,8 +98,6 @@ bool AddNewList::checkIfNameUnique() const
 {
     std::vector<QString> buffer;
     QString dataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/data";
-
-    QDir dir(dataPath);
 
     for(const auto & i: std::filesystem::directory_iterator(dataPath.toStdString()))
     {

@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "DataTransfer.h"
+#include "listsettings.h"
 
 
 namespace Ui {
@@ -39,6 +40,7 @@ private:
     void closeEvent(QCloseEvent *event);
 
     void storeLanguageNames();
+    void settingsFinished(); 
 
 };
 

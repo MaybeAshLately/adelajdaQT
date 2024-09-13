@@ -10,6 +10,7 @@ class DataTransfer
     {
         newListAdded=false;
         listDeleted=false;
+        listNameModified=false;
     }
 
     static std::unique_ptr<DataTransfer> instance;
@@ -37,6 +38,7 @@ public:
 
 
     bool listDeleted;
+    bool listNameModified;
 
 
 };

@@ -135,7 +135,14 @@ void MainWindow::listOptionsFinished()
         dataTransfer.currentListLanguageOneName="";
         dataTransfer.currentListLanguageTwoName="";
     }
+    if(dataTransfer.listNameModified==true)
+    {
+        getListNamesFromFileNamesInDirectory();
+        setNamesOnWidgetList();
+        dataTransfer.listNameModified=false;
+    }
 }
+
 
 
 MainWindow::~MainWindow()

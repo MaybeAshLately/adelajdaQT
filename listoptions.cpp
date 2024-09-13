@@ -51,12 +51,9 @@ void ListOptions::on_goBackButton_clicked()
 
 void ListOptions::closeEvent(QCloseEvent *event)
 {
-    QDialog::closeEvent(event);
-    emit finished(0);
 
     if(goBackToMain==true)
     {
-        QDialog::closeEvent(event);
         emit finished(0);
     }
     else
@@ -118,6 +115,27 @@ void ListOptions::on_learningModeAButton_clicked()
 
 void ListOptions::on_settingsButton_clicked()
 {
+    ListSettings* w;
+    w= new ListSettings(this);
+    w->setStyleSheet("background-color: #FFFF86;");
+    w->setWindowTitle("Settings");
+    w->setFixedSize(800,600);
+
+    connect(w, &ListSettings::finished, this, &ListOptions::settingsFinished);
+    this->hide();
+    w->show();
+}
+
+
+void ListOptions::settingsFinished()
+{
+    ui->nameLabel->setText(dataTransfer.currentListName);
+    if(!dataTransfer.listDeleted) this->show();
+    else
+    {
+        goBackToMain=true;
+        this->close();
+    }
 
 }
 

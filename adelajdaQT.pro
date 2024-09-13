@@ -12,6 +12,7 @@ SOURCES += \
     DataTransfer.cpp \
     addnewlist.cpp \
     listoptions.cpp \
+    listsettings.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -19,11 +20,13 @@ HEADERS += \
     DataTransfer.h \
     addnewlist.h \
     listoptions.h \
+    listsettings.h \
     mainwindow.h
 
 FORMS += \
     addnewlist.ui \
     listoptions.ui \
+    listsettings.ui \
     mainwindow.ui
 
 # Default rules for deployment.
