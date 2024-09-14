@@ -101,15 +101,29 @@ void ListOptions::on_displayButton_clicked()
 }
 
 
-void ListOptions::on_addNewWordButton_clicked()
+void ListOptions::on_learningModeAButton_clicked()
 {
 
 }
 
 
-void ListOptions::on_learningModeAButton_clicked()
+void ListOptions::on_addNewWordButton_clicked()
 {
+    AddNewWord* w;
+    w= new AddNewWord(this);
+    w->setStyleSheet("background-color: #FFFF86;");
+    w->setWindowTitle("Add new word");
+    w->setFixedSize(800,600);
 
+    connect(w, &AddNewWord::finished, this, &ListOptions::addingWordFinished);
+    this->hide();
+    w->show();
+}
+
+
+void ListOptions::addingWordFinished()
+{
+    this->show();
 }
 
 

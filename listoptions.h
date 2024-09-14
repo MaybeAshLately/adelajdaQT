@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "DataTransfer.h"
 #include "listsettings.h"
+#include "addnewword.h"
 
 
 namespace Ui {
@@ -40,7 +41,8 @@ private:
     void closeEvent(QCloseEvent *event);
 
     void storeLanguageNames();
-    void settingsFinished(); 
+    void settingsFinished();
+    void addingWordFinished();
 
 };
 

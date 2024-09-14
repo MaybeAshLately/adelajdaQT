@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     DataTransfer.cpp \
     addnewlist.cpp \
+    addnewword.cpp \
     listoptions.cpp \
     listsettings.cpp \
     main.cpp \
@@ -19,12 +20,14 @@ SOURCES += \
 HEADERS += \
     DataTransfer.h \
     addnewlist.h \
+    addnewword.h \
     listoptions.h \
     listsettings.h \
     mainwindow.h
 
 FORMS += \
     addnewlist.ui \
+    addnewword.ui \
     listoptions.ui \
     listsettings.ui \
     mainwindow.ui
