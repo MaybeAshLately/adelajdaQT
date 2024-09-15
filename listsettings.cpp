@@ -5,7 +5,6 @@
 #include <QStandardPaths>
 #include <filesystem>
 #include <QVBoxLayout>
-#include <iostream>
 
 
 ListSettings::ListSettings(QWidget *parent)
@@ -21,7 +20,6 @@ ListSettings::ListSettings(QWidget *parent)
     ui->editTextListName->setPlainText(dataTransfer.currentListName);
     ui->editTextLanguageOneName->setPlainText(dataTransfer.currentListLanguageOneName);
     ui->editTextLanguageTwoName->setPlainText(dataTransfer.currentListLanguageTwoName);
-    std::cout<<"konstruktor"<<std::endl;
     goBackToOptions=false;
 }
 

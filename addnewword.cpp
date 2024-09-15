@@ -57,7 +57,7 @@ void AddNewWord::on_addWordButton_clicked()
 bool AddNewWord::checkIfCorrect() const
 {
     if((languageOneWord=="")||(languageTwoWord=="")) return false;
-    if(languageOneWord.contains(';')||languageTwoWord.contains(';')) return false;
+    if(languageOneWord.contains(';')||languageTwoWord.contains(';')||comment.contains(";")) return false;
     return true;
 }
 
@@ -87,7 +87,7 @@ void AddNewWord::addWord()
     }
     file.close();
 
-
+    dataTransfer.newWordAdded=true;
     goBack=true;
     this->close();
 }

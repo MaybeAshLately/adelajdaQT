@@ -11,6 +11,8 @@ class DataTransfer
         newListAdded=false;
         listDeleted=false;
         listNameModified=false;
+        newWordAdded=false;
+        //newWordToDisplay="";
     }
 
     static std::unique_ptr<DataTransfer> instance;
@@ -39,6 +41,9 @@ public:
 
     bool listDeleted;
     bool listNameModified;
+
+    bool newWordAdded;
+   // QString newWordToDisplay;
 
 
 };

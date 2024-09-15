@@ -5,6 +5,7 @@
 #include "DataTransfer.h"
 #include "listsettings.h"
 #include "addnewword.h"
+#include "listcontent.h"
 
 
 namespace Ui {
@@ -43,6 +44,7 @@ private:
     void storeLanguageNames();
     void settingsFinished();
     void addingWordFinished();
+    void listFinished();
 
 };
 

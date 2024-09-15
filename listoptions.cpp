@@ -51,7 +51,6 @@ void ListOptions::on_goBackButton_clicked()
 
 void ListOptions::closeEvent(QCloseEvent *event)
 {
-
     if(goBackToMain==true)
     {
         emit finished(0);
@@ -97,7 +96,20 @@ void ListOptions::on_learningModeBButton_clicked()
 
 void ListOptions::on_displayButton_clicked()
 {
+    ListContent* w;
+    w= new ListContent(this);
+    w->setStyleSheet("background-color: #FFFF86;");
+    w->setWindowTitle(dataTransfer.currentListName);
+    w->setFixedSize(800,600);
 
+    connect(w, &ListContent::finished, this, &ListOptions::listFinished);
+    this->hide();
+    w->show();
+}
+
+void ListOptions::listFinished()
+{
+    this->show();
 }
 
 

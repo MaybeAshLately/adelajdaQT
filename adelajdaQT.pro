@@ -12,6 +12,7 @@ SOURCES += \
     DataTransfer.cpp \
     addnewlist.cpp \
     addnewword.cpp \
+    listcontent.cpp \
     listoptions.cpp \
     listsettings.cpp \
     main.cpp \
@@ -21,6 +22,7 @@ HEADERS += \
     DataTransfer.h \
     addnewlist.h \
     addnewword.h \
+    listcontent.h \
     listoptions.h \
     listsettings.h \
     mainwindow.h
@@ -28,6 +30,7 @@ HEADERS += \
 FORMS += \
     addnewlist.ui \
     addnewword.ui \
+    listcontent.ui \
     listoptions.ui \
     listsettings.ui \
     mainwindow.ui
