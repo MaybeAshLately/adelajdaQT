@@ -107,6 +107,7 @@ void ListSettings::displayInfo()
 
     QPushButton *okButton = new QPushButton("Ok");
     layout->addWidget(okButton);
+    okButton->setStyleSheet("background-color: #C0C0C0;");
     connect(okButton, &QPushButton::clicked,&dialog, [&dialog](){dialog.close();} );
 
     dialog.exec();
@@ -170,11 +171,13 @@ void ListSettings::on_deleteListButton_clicked()
 
     QPushButton *cancelButton = new QPushButton("Cancel");
     layout->addWidget(cancelButton);
+    cancelButton->setStyleSheet("background-color: #00BA0C;");
     connect(cancelButton, &QPushButton::clicked,&dialog, [&dialog](){dialog.close();} );
 
 
     QPushButton *yesButton = new QPushButton("Yes");
     layout->addWidget(yesButton);
+    yesButton->setStyleSheet("background-color: #FF0000;");
     connect(yesButton, &QPushButton::clicked,&dialog, [this, &dialog](){
         deleteList();
         dialog.close();

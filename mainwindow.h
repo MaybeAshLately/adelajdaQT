@@ -38,7 +38,6 @@ private:
     void setImage();
     void getListNamesFromFileNamesInDirectory();
     void setNamesOnWidgetList();
-    void setListWidgetSize();
     void addNewListFinished();
     void listOptionsFinished();
 

@@ -32,6 +32,13 @@ private:
     void closeEvent(QCloseEvent *event);
     void setData();
 
+    void deleteWord();
+    void askIfDeleteWord();
+    void editWord();
+    void saveChanges(QString newWordOne,QString newWordTwo,QString newCom,QString newCol);
+    void displayInfo();
+
+
 };
 
 #endif // SINGLEWORD_H

@@ -143,6 +143,7 @@ void AddNewList::displayInfo()
     layout->addWidget(label);
 
     QPushButton *okButton = new QPushButton("Ok");
+    okButton->setStyleSheet("background-color: #C0C0C0;");
     layout->addWidget(okButton);
     connect(okButton, &QPushButton::clicked, [&dialog](){dialog.close();} );
 

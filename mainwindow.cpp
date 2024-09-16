@@ -47,16 +47,7 @@ void MainWindow::setNamesOnWidgetList()
         ui->listWidget->addItem(listNames.at(i));
         ui->listWidget->item(i)->setTextAlignment(Qt::AlignCenter);
     }
-    setListWidgetSize();
     ui->listWidget->setStyleSheet("QListWidget::item { border-bottom: 1px solid gray; padding: 5px; }");
-}
-
-
-void MainWindow::setListWidgetSize()
-{
-    int width = ui->add_new_list->width();
-    int height = ui->listWidget->sizeHintForRow(0)*ui->listWidget->count()+ui->listWidget->count()*(1+5+5+1+1);
-    ui->listWidget->setFixedSize(width, height);
 }
 
 

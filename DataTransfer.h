@@ -19,6 +19,8 @@ class DataTransfer
         currentWordLanguageTwo="";
         currentComment="";
         currentColor="";
+
+        currentItemNumber=0;
     }
 
     static std::unique_ptr<DataTransfer> instance;
@@ -58,8 +60,7 @@ public:
     QString currentComment;
     QString currentColor;
 
-
-
+    int currentItemNumber;
 };
 
 

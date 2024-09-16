@@ -84,17 +84,8 @@ void ListContent::setNamesOnWidgetList()
         ui->listWidget->addItem(languageOneWords.at(i)+" - "+languageTwoWords.at(i));
         ui->listWidget->item(i)->setTextAlignment(Qt::AlignCenter);
     }
-    setListWidgetSize();
     ui->listWidget->setStyleSheet("QListWidget::item { border-bottom: 1px solid gray; padding: 5px; }");
 }
-
-
-void ListContent::setListWidgetSize()
-{
-    int height = ui->listWidget->sizeHintForRow(0)*ui->listWidget->count()+ui->listWidget->count()*(1+5+5+1+1);
-    ui->listWidget->setFixedHeight(height);
-}
-
 
 
 void ListContent::closeEvent(QCloseEvent *event)
@@ -148,6 +139,8 @@ void ListContent::on_listWidget_itemClicked(QListWidgetItem *item)
 {
     int number= ui->listWidget->row(item);
 
+    dataTransfer.currentItemNumber=number;
+
     dataTransfer.currentWordLanguageOne=languageOneWords.at(number);
     dataTransfer.currentWordLanguageTwo=languageTwoWords.at(number);
     dataTransfer.currentComment=comments.at(number);
@@ -169,12 +162,14 @@ void ListContent::singleWordFinished()
 {
     if(dataTransfer.wordEdited==true)
     {
-        //
+        getDataFromFile();
+        setNamesOnWidgetList();
         dataTransfer.wordEdited=false;
     }
     if(dataTransfer.wordDeleted==true)
     {
-        //
+        getDataFromFile();
+        setNamesOnWidgetList();
         dataTransfer.wordDeleted=false;
     }
     this->show();

@@ -105,7 +105,8 @@ void AddNewWord::displayInfo()
 
     QPushButton *okButton = new QPushButton("Ok");
     layout->addWidget(okButton);
-    connect(okButton, &QPushButton::clicked, [&dialog](){dialog.close();} );
+    okButton->setStyleSheet("background-color: #C0C0C0;");
+    connect(okButton, &QPushButton::clicked,this, [&dialog](){dialog.close();} );
 
     dialog.exec();
 }

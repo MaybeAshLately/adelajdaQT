@@ -41,7 +41,6 @@ private:
 
     void getDataFromFile();
     void setNamesOnWidgetList();
-    void setListWidgetSize();
     void addingWordFinished();
     void singleWordFinished();
 
