@@ -16,7 +16,8 @@ SOURCES += \
     listoptions.cpp \
     listsettings.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    singleword.cpp
 
 HEADERS += \
     DataTransfer.h \
@@ -25,7 +26,8 @@ HEADERS += \
     listcontent.h \
     listoptions.h \
     listsettings.h \
-    mainwindow.h
+    mainwindow.h \
+    singleword.h
 
 FORMS += \
     addnewlist.ui \
@@ -33,7 +35,8 @@ FORMS += \
     listcontent.ui \
     listoptions.ui \
     listsettings.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    singleword.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

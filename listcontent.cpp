@@ -139,7 +139,43 @@ void ListContent::addingWordFinished()
         setNamesOnWidgetList();
 
         dataTransfer.newWordAdded=false;
-        //dataTransfer.newWordToDisplay="";
+    }
+    this->show();
+}
+
+
+void ListContent::on_listWidget_itemClicked(QListWidgetItem *item)
+{
+    int number= ui->listWidget->row(item);
+
+    dataTransfer.currentWordLanguageOne=languageOneWords.at(number);
+    dataTransfer.currentWordLanguageTwo=languageTwoWords.at(number);
+    dataTransfer.currentComment=comments.at(number);
+    dataTransfer.currentColor=colors.at(number);
+
+
+    SingleWord* w;
+    w= new SingleWord(this);
+    w->setWindowTitle(item->text());
+    w->setFixedSize(800,600);
+
+    connect(w, &SingleWord::finished, this, &ListContent::singleWordFinished);
+    this->hide();
+    w->show();
+}
+
+
+void ListContent::singleWordFinished()
+{
+    if(dataTransfer.wordEdited==true)
+    {
+        //
+        dataTransfer.wordEdited=false;
+    }
+    if(dataTransfer.wordDeleted==true)
+    {
+        //
+        dataTransfer.wordDeleted=false;
     }
     this->show();
 }

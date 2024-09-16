@@ -4,6 +4,8 @@
 #include <QDialog>
 #include "DataTransfer.h"
 #include "addnewword.h"
+#include "singleword.h"
+#include <QListWidget>
 
 namespace Ui {
 class ListContent;
@@ -22,6 +24,8 @@ private slots:
 
     void on_addNewWordButton_clicked();
 
+    void on_listWidget_itemClicked(QListWidgetItem *item);
+
 private:
     Ui::ListContent *ui;
     DataTransfer& dataTransfer;
@@ -39,6 +43,7 @@ private:
     void setNamesOnWidgetList();
     void setListWidgetSize();
     void addingWordFinished();
+    void singleWordFinished();
 
 };
 

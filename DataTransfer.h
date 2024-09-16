@@ -12,7 +12,13 @@ class DataTransfer
         listDeleted=false;
         listNameModified=false;
         newWordAdded=false;
-        //newWordToDisplay="";
+        wordDeleted=false;
+        wordEdited=false;
+
+        currentWordLanguageOne="";
+        currentWordLanguageTwo="";
+        currentComment="";
+        currentColor="";
     }
 
     static std::unique_ptr<DataTransfer> instance;
@@ -43,7 +49,15 @@ public:
     bool listNameModified;
 
     bool newWordAdded;
-   // QString newWordToDisplay;
+
+    bool wordEdited;
+    bool wordDeleted;
+
+    QString currentWordLanguageOne;
+    QString currentWordLanguageTwo;
+    QString currentComment;
+    QString currentColor;
+
 
 
 };
