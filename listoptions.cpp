@@ -88,6 +88,25 @@ void ListOptions::storeLanguageNames()
 }
 
 
+void ListOptions::on_learningModeAButton_clicked()
+{
+    LearningModeA* w;
+    w= new LearningModeA(this);
+    w->setWindowTitle("Learning mode A");
+    w->setFixedSize(800,600);
+
+    connect(w, &LearningModeA::finished, this, &ListOptions::learningFinished);
+    this->hide();
+    w->show();
+}
+
+
+void ListOptions::learningFinished()
+{
+    this->show();
+}
+
+
 void ListOptions::on_learningModeBButton_clicked()
 {
 
@@ -110,12 +129,6 @@ void ListOptions::on_displayButton_clicked()
 void ListOptions::listFinished()
 {
     this->show();
-}
-
-
-void ListOptions::on_learningModeAButton_clicked()
-{
-
 }
 
 

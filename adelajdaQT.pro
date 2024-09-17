@@ -12,6 +12,7 @@ SOURCES += \
     DataTransfer.cpp \
     addnewlist.cpp \
     addnewword.cpp \
+    learningmodea.cpp \
     listcontent.cpp \
     listoptions.cpp \
     listsettings.cpp \
@@ -23,6 +24,7 @@ HEADERS += \
     DataTransfer.h \
     addnewlist.h \
     addnewword.h \
+    learningmodea.h \
     listcontent.h \
     listoptions.h \
     listsettings.h \
@@ -32,6 +34,7 @@ HEADERS += \
 FORMS += \
     addnewlist.ui \
     addnewword.ui \
+    learningmodea.ui \
     listcontent.ui \
     listoptions.ui \
     listsettings.ui \

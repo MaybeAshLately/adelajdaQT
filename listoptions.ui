@@ -64,8 +64,8 @@
   <widget class="QPushButton" name="learningModeBButton">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>400</y>
+     <x>530</x>
+     <y>390</y>
      <width>211</width>
      <height>51</height>
     </rect>
@@ -80,8 +80,8 @@
   <widget class="QPushButton" name="learningModeAButton">
    <property name="geometry">
     <rect>
-     <x>530</x>
-     <y>400</y>
+     <x>50</x>
+     <y>390</y>
      <width>211</width>
      <height>51</height>
     </rect>

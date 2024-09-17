@@ -6,6 +6,7 @@
 #include "listsettings.h"
 #include "addnewword.h"
 #include "listcontent.h"
+#include "learningmodea.h"
 
 
 namespace Ui {
@@ -45,6 +46,7 @@ private:
     void settingsFinished();
     void addingWordFinished();
     void listFinished();
+    void learningFinished();
 
 };
 
