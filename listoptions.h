@@ -7,6 +7,7 @@
 #include "addnewword.h"
 #include "listcontent.h"
 #include "learningmodea.h"
+#include "learningmodeb.h"
 
 
 namespace Ui {

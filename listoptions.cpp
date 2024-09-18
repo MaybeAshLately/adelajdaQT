@@ -109,7 +109,14 @@ void ListOptions::learningFinished()
 
 void ListOptions::on_learningModeBButton_clicked()
 {
+    LearningModeB* w;
+    w= new LearningModeB(this);
+    w->setWindowTitle("Learning mode B");
+    w->setFixedSize(800,600);
 
+    connect(w, &LearningModeB::finished, this, &ListOptions::learningFinished);
+    this->hide();
+    w->show();
 }
 
 

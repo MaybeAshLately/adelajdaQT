@@ -28,8 +28,6 @@ LearningModeA::LearningModeA(QWidget *parent)
 void LearningModeA::setData()
 {
     ui->listName->setText(dataTransfer.currentListName);
-    //ui->languageOneName->setText(dataTransfer.currentListLanguageOneName);
-    //ui->languageTwoName->setText(dataTransfer.currentListLanguageTwoName);
 
     ui->revealButton->setStyleSheet("background-color: #911785;");
     ui->previousWordButton->setStyleSheet("background-color: #3569F9;");
@@ -48,7 +46,7 @@ void LearningModeA::displayStartInfo()
 {
     QDialog dialog(this);
 
-    dialog.setWindowTitle("Start");
+    dialog.setWindowTitle("Learning mode A start");
     QVBoxLayout *layout = new QVBoxLayout(&dialog);
 
     QGridLayout *gridLayout = new QGridLayout();

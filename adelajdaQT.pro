@@ -13,6 +13,7 @@ SOURCES += \
     addnewlist.cpp \
     addnewword.cpp \
     learningmodea.cpp \
+    learningmodeb.cpp \
     listcontent.cpp \
     listoptions.cpp \
     listsettings.cpp \
@@ -25,6 +26,7 @@ HEADERS += \
     addnewlist.h \
     addnewword.h \
     learningmodea.h \
+    learningmodeb.h \
     listcontent.h \
     listoptions.h \
     listsettings.h \
@@ -35,6 +37,7 @@ FORMS += \
     addnewlist.ui \
     addnewword.ui \
     learningmodea.ui \
+    learningmodeb.ui \
     listcontent.ui \
     listoptions.ui \
     listsettings.ui \
