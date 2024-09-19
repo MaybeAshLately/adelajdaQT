@@ -8,7 +8,6 @@
 #include <QStandardPaths>
 #include <algorithm>
 #include <cctype>
-#include <fstream>
 #include <QDialog>
 #include <QVBoxLayout>
 #include <QPushButton>
@@ -96,12 +95,11 @@ bool AddNewList::checkIfNameCorrect(const QString string) const
 
 bool AddNewList::checkIfNameUnique() const
 {
-    std::vector<QString> buffer;
+    QVector<QString> buffer;
     QString dataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/data";
 
     for(const auto & i: std::filesystem::directory_iterator(dataPath.toStdString()))
     {
-
         QString fileBuffer=QString::fromStdString(i.path().filename().string());
         buffer.push_back(fileBuffer);
     }
@@ -114,15 +112,14 @@ bool AddNewList::checkIfNameUnique() const
 void AddNewList::addList()
 {
     QString dataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/data/";
+    QString directory=dataPath+listName;
 
-    std::string directory=dataPath.toStdString()+listName.toStdString();
-
-    std::ofstream file(directory);
-    if(file)
+    QFile file(directory);
+    if(file.open(QIODevice::WriteOnly|QIODevice::Text))
     {
-        file<<languageOneName.toStdString()+";"+languageTwoName.toStdString()<<std::endl;
+        QTextStream out(&file);
+        out<<languageOneName+";"+languageTwoName<<"\n";
     }
-
     file.close();
 
     dataTransfer.newListAdded=true;

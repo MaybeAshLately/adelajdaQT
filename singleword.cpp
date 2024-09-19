@@ -3,9 +3,9 @@
 #include <iostream>
 #include <QVBoxLayout>
 #include <QStandardPaths>
-#include <fstream>
 #include <QTextEdit>
 #include <QRadioButton>
+#include <QFile>
 
 SingleWord::SingleWord(QWidget *parent)
     : QDialog(parent)
@@ -119,29 +119,30 @@ void SingleWord::askIfDeleteWord()
 
 void SingleWord::deleteWord()
 {
-    std::vector<QString> fileContent;
+    QVector<QString> fileContent;
     QString dataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/data/";
-    std::string directory=dataPath.toStdString()+dataTransfer.currentListName.toStdString();
+    QString directory=dataPath+dataTransfer.currentListName;
 
-    std::string lineBuffer;
-
-    std::ifstream file(directory);
-    if(file)
+    QFile file(directory);
+    if(file.open(QIODevice::ReadOnly|QIODevice::Text))
     {
-        while(std::getline(file,lineBuffer)) fileContent.push_back(QString::fromStdString(lineBuffer));
+        while(!file.atEnd()) fileContent.push_back(file.readLine());
     }
     file.close();
 
     fileContent.erase(fileContent.begin()+dataTransfer.currentItemNumber+1);
 
-    std::ofstream newFile(directory);
-    if(newFile)
+
+    QFile newFile(directory);
+    if(newFile.open(QIODevice::WriteOnly|QIODevice::Text))
     {
-        for(size_t i=0;i<fileContent.size();++i)
+        QTextStream out(&newFile);
+        for(int i=0;i<fileContent.size();++i)
         {
-            newFile<<fileContent.at(i).toStdString()<<std::endl;
+            out<<fileContent[i];
         }
     }
+    newFile.close();
 
    dataTransfer.wordDeleted=true;
    dataTransfer.currentWordLanguageOne="";
@@ -257,29 +258,30 @@ void SingleWord::saveChanges(QString newWordOne,QString newWordTwo,QString newCo
         return;
     }
 
-    std::vector<QString> fileContent;
+    QVector<QString> fileContent;
     QString dataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/data/";
-    std::string directory=dataPath.toStdString()+dataTransfer.currentListName.toStdString();
+    QString directory=dataPath+dataTransfer.currentListName;
 
-    std::string lineBuffer;
 
-    std::ifstream file(directory);
-    if(file)
+    QFile file(directory);
+    if(file.open(QIODevice::ReadOnly|QIODevice::Text))
     {
-        while(std::getline(file,lineBuffer)) fileContent.push_back(QString::fromStdString(lineBuffer));
+        while(!file.atEnd()) fileContent.push_back(file.readLine());
     }
     file.close();
 
-    fileContent.at(dataTransfer.currentItemNumber+1)=newWordOne+";"+newWordTwo+";"+newCom+";"+newCol;
+    fileContent[dataTransfer.currentItemNumber+1]=newWordOne+";"+newWordTwo+";"+newCom+";"+newCol;
 
-    std::ofstream newFile(directory);
-    if(newFile)
+    QFile newFile(directory);
+    if(newFile.open(QIODevice::WriteOnly|QIODevice::Text))
     {
-        for(size_t i=0;i<fileContent.size();++i)
+        QTextStream out(&newFile);
+        for(int i=0;i<fileContent.size();++i)
         {
-            newFile<<fileContent.at(i).toStdString()<<std::endl;
+            out<<fileContent[i];
         }
     }
+    newFile.close();
 
     dataTransfer.wordEdited=true;
     dataTransfer.currentWordLanguageOne=newWordOne;

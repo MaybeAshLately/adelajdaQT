@@ -5,7 +5,7 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsView>
 #include <QStandardPaths>
-#include <fstream>
+#include <QFile>
 
 ListOptions::ListOptions(QWidget *parent)
     : QDialog(parent)
@@ -65,19 +65,15 @@ void ListOptions::closeEvent(QCloseEvent *event)
 void ListOptions::storeLanguageNames()
 {
     QString dataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/data/";
+    QString directory=dataPath+dataTransfer.currentListName;
 
-    std::string directory=dataPath.toStdString()+dataTransfer.currentListName.toStdString();
-
-    std::string lineBuffer;
-
-    std::ifstream file(directory);
-    if(file)
+    QString line;
+    QFile file(directory);
+    if(file.open(QIODevice::ReadOnly|QIODevice::Text))
     {
-        std::getline(file,lineBuffer);
+        line=file.readLine();
     }
     file.close();
-
-    QString line=QString::fromStdString(lineBuffer);
 
     if(line!="")
     {

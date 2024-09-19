@@ -4,10 +4,10 @@
 #include <QMainWindow>
 #include <QGraphicsView>
 #include <QGraphicsScene>
-#include <vector>
 #include <string>
 #include <QListWidget>
 #include "DataTransfer.h"
+#include <QVector>
 
 
 QT_BEGIN_NAMESPACE
@@ -31,7 +31,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    std::vector<QString> listNames;
+    QVector<QString> listNames;
     DataTransfer& dataTransfer;
 
 

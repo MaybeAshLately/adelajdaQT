@@ -3,7 +3,7 @@
 #include <QStandardPaths>
 #include <iostream>
 #include <QVBoxLayout>
-#include <fstream>
+#include <QFile>
 
 AddNewWord::AddNewWord(QWidget *parent)
     : QDialog(parent)
@@ -75,15 +75,16 @@ void AddNewWord::addWord()
     else if(ui->pinkButton->isChecked()) color="pink";
     else if(ui->grayButton->isChecked()) color="gray";
 
-    std::string newLine=languageOneWord.toStdString()+";"+languageTwoWord.toStdString()+";"+comment.toStdString()+";"+color.toStdString();
+    QString newLine=languageOneWord+";"+languageTwoWord+";"+comment+";"+color;
 
     QString dataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/data/";
-    std::string directory=dataPath.toStdString()+dataTransfer.currentListName.toStdString();
+    QString directory=dataPath+dataTransfer.currentListName;
 
-    std::ofstream file(directory,std::ios_base::app);
-    if(file)
+    QFile file(directory);
+    if(file.open(QIODevice::Append|QIODevice::Text))
     {
-        file<<newLine<<std::endl;
+        QTextStream out(&file);
+        out<<newLine<<"\n";
     }
     file.close();
 

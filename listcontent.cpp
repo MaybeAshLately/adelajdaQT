@@ -4,7 +4,7 @@
 #include <QPixmap>
 #include <QGraphicsPixmapItem>
 #include <QStandardPaths>
-#include <fstream>
+#include <QFile>
 
 ListContent::ListContent(QWidget *parent)
     : QDialog(parent)
@@ -49,19 +49,16 @@ void ListContent::getDataFromFile()
     colors.clear();
 
     QString dataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/data/";
+    QString directory=dataPath+dataTransfer.currentListName;
 
-    std::string directory=dataPath.toStdString()+dataTransfer.currentListName.toStdString();
-
-    std::string lineBuffer;
-
-    std::ifstream file(directory);
-    if(file)
+    QFile file(directory);
+    if(file.open(QIODevice::ReadOnly|QIODevice::Text))
     {
-        while(std::getline(file,lineBuffer)) fileContent.push_back(QString::fromStdString(lineBuffer));
+        while(!file.atEnd()) fileContent.push_back(file.readLine());
     }
     file.close();
 
-    for(size_t i=1;i<fileContent.size();++i)
+    for(int i=1;i<fileContent.size();++i)
     {
         if(fileContent.at(i)!="")
         {
@@ -79,7 +76,7 @@ void ListContent::setNamesOnWidgetList()
 {
     ui->listWidget->clear();
 
-    for(size_t i=0;i<languageOneWords.size();++i)
+    for(int i=0;i<languageOneWords.size();++i)
     {
         ui->listWidget->addItem(languageOneWords.at(i)+" - "+languageTwoWords.at(i));
         ui->listWidget->item(i)->setTextAlignment(Qt::AlignCenter);

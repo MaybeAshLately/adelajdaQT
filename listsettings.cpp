@@ -1,12 +1,11 @@
 #include "listsettings.h"
 #include "ui_listsettings.h"
-#include <fstream>
-#include <vector>
+#include <QVector>
 #include <QStandardPaths>
 #include <filesystem>
 #include <QVBoxLayout>
-
-
+#include <QFile>
+#include <QRegularExpression>
 ListSettings::ListSettings(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::ListSettings)
@@ -67,12 +66,8 @@ bool ListSettings::checkIfNamesCorrect() const
 
 bool ListSettings::checkIfNameCorrect(const QString string) const
 {
-    for(int i=0;i<string.size();++i)
-    {
-        QChar buf=string.at(i);
-        if((buf.isLetterOrNumber()==false)&&(buf!='_')&&(buf!=' ')) return false;
-    }
-    return true;
+    QRegularExpression regex("^[\\p{L}\\p{N}_ ]+$");
+    return regex.match(string).hasMatch();
 }
 
 
@@ -118,37 +113,35 @@ void ListSettings::editList()
 {
 
     QString dataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/data/";
-    std::string directory=dataPath.toStdString()+dataTransfer.currentListName.toStdString();
+    QString directory=dataPath+dataTransfer.currentListName;
 
-    std::vector<QString> buffer;
+    QVector<QString> buffer;
 
-    std::ifstream file(directory);
-    if(file)
+    QFile file(directory);
+    if(file.open(QIODevice::ReadOnly|QIODevice::Text))
     {
-        std::string line;
-        while(std::getline(file,line)) buffer.push_back(QString::fromStdString(line));
+        while(!file.atEnd()) buffer.push_back(file.readLine());
     }
     file.close();
 
     if(listName!=dataTransfer.currentListName)
     {
-        const char* fileChar=directory.c_str();
-        remove(fileChar);
+        file.remove();
         dataTransfer.listNameModified=true;
     }
 
-    buffer.at(0)=languageOneName+";"+languageTwoName;
+    buffer[0]=languageOneName+";"+languageTwoName;
 
-    std::string newDirectory=dataPath.toStdString()+listName.toStdString();
-    std::ofstream newFile(newDirectory);
-    if(newFile)
+    QString newDirectory=dataPath+listName;
+    QFile newFile(newDirectory);
+    if(newFile.open(QIODevice::WriteOnly|QIODevice::Text))
     {
-        for(size_t i=0;i<buffer.size();++i)
+        QTextStream out(&newFile);
+        for(int i=0;i<buffer.size();++i)
         {
-            newFile<<buffer.at(i).toStdString();
+            out<<buffer[i];
         }
     }
-
     newFile.close();
 
     goBackToOptions=true;

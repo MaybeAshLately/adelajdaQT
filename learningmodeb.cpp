@@ -1,11 +1,11 @@
 #include "learningmodeb.h"
 #include "ui_learningmodeb.h"
 #include <QStandardPaths>
-#include <fstream>
 #include <random>
 #include <QVBoxLayout>
 #include <QRadioButton>
 #include <QButtonGroup>
+#include <QFile>
 
 LearningModeB::LearningModeB(QWidget *parent)
     : QDialog(parent)
@@ -148,17 +148,15 @@ void LearningModeB::getDataFromFile()
     comments.clear();
     colors.clear();
 
-
     QString dataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/data/";
-    std::string directory=dataPath.toStdString()+dataTransfer.currentListName.toStdString();
-
+    QString directory=dataPath+dataTransfer.currentListName;
 
     QVector<QString> listContentBuffer;
-    std::ifstream file(directory);
-    if(file)
+
+    QFile file(directory);
+    if(file.open(QIODevice::ReadOnly|QIODevice::Text))
     {
-        std::string lineBuffer;
-        while(std::getline(file,lineBuffer)) listContentBuffer.push_back(QString::fromStdString(lineBuffer));
+        while(!file.atEnd()) listContentBuffer.push_back(file.readLine());
     }
     file.close();
 

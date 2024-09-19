@@ -6,6 +6,7 @@
 #include "addnewword.h"
 #include "singleword.h"
 #include <QListWidget>
+#include <QVector>
 
 namespace Ui {
 class ListContent;
@@ -30,11 +31,11 @@ private:
     Ui::ListContent *ui;
     DataTransfer& dataTransfer;
     bool goBack;
-    std::vector<QString> fileContent;
-    std::vector<QString> languageOneWords;
-    std::vector<QString> languageTwoWords;
-    std::vector<QString> comments;
-    std::vector<QString> colors;
+    QVector<QString> fileContent;
+    QVector<QString> languageOneWords;
+    QVector<QString> languageTwoWords;
+    QVector<QString> comments;
+    QVector<QString> colors;
 
     void setImage();
     void closeEvent(QCloseEvent *event);
